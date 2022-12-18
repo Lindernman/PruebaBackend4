@@ -13,7 +13,7 @@ def inicio(request):
 def login(request):
     if request.POST:
         data = requests.post(
-            'http://127.0.0.1:8000/api/persona/login/', data=request.POST, cookies=request.COOKIES).json()
+            'https://backend.ostap.io/api/persona/login/', data=request.POST, cookies=request.COOKIES).json()
         if "user_id" in data:
 
             response = redirect('detalle')
@@ -26,7 +26,7 @@ def login(request):
 def register(request):
     if request.POST:
         data = requests.post(
-            'http://127.0.0.1:8000/api/persona/register/', data=request.POST, ).json()
+            'https://backend.ostap.io/api/persona/register/', data=request.POST, ).json()
         if "user_id" in data:
             return redirect('login')
     return render(request, 'registro.html')
@@ -44,7 +44,7 @@ def detalle(request):
         user_id = request.COOKIES.get('user_id')
 
         data = requests.get(
-            'http://127.0.0.1:8000/api/persona/' + user_id).json()
+            'https://backend.ostap.io/api/persona/' + user_id).json()
 
         return render(request, 'detalle.html', {'auth': True, 'data': data})
     else:
@@ -55,7 +55,7 @@ def transaction(request):
     if request.session.test_cookie_worked():
         if request.POST:
             data = requests.post(
-                'http://127.0.0.1:8000/api/persona/transaction/', data=request.POST, cookies=request.COOKIES).json()
+                'https://backend.ostap.io/api/persona/transaction/', data=request.POST, cookies=request.COOKIES).json()
             print(data)
 
     return redirect('detalle')
