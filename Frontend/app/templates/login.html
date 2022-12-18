@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block content %}
+<div
+  class="flex flex gap-4 m-auto mt-20 flex-col w-full items-center justify-center font-bold text-4xl"
+>
+  <div class="flex flex-col p-4 gap-2">
+    <div class="text-center text-white text-2xl font-extrabold">INGRESAR</div>
+    <form
+      class="flex flex-col gap-2 my-2"
+      type="submit"
+      method="POST"
+      action="{% url 'login' %}"
+    >
+      {% csrf_token %}
+      <input
+        name="username"
+        type="text"
+        class="input input-sm"
+        placeholder="Nombre de usuario"
+      />
+      <input
+        name="password"
+        type="password"
+        class="input input-sm"
+        placeholder="Clave"
+      />
+      <button class="btn btn-sm bg-emerald-500 text-white">INGRESAR</button>
+    </form>
+  </div>
+</div>
+{% endblock content %}

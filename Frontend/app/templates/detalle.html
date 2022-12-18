@@ -1,0 +1,50 @@
+{% extends "base.html" %} {% block content %}
+<div
+  class="flex items-center justify-center flex-col max-w-xl mx-auto mt-10 gap-2"
+>
+  <div class="font-extrabold text-xl">Hola {{data.username}}</div>
+  <div class="font-extrabold text-xl">USER_ID: {{data.user_id}}</div>
+  <div class="font-extrabold text-xl">Tu balance: $ {{data.money_amount}}</div>
+  <form
+    class="flex gap-2 my-2"
+    type="submit"
+    method="POST"
+    action="{% url 'transaction' %}"
+  >
+    {% csrf_token %}
+    <input
+      name="user_id"
+      value=""
+      type="number"
+      class="input input-sm"
+      placeholder="ID Usuario"
+    />
+    <input
+      name="amount"
+      type="number"
+      class="input input-sm"
+      placeholder="Monto"
+    />
+    <button class="btn btn-sm bg-emerald-500 text-white">
+      Realizar Transaccion
+    </button>
+  </form>
+  <table class="table">
+    <tr>
+      <th>ID Transaccion</th>
+      <th>ID Usuario</th>
+      <th>Monto</th>
+      <th>Fecha</th>
+    </tr>
+    {% for tx in data.transactions %}
+    <tr>
+      <td>{{tx.id}}</td>
+      <td>{{tx.user}}</td>
+      <td>{{tx.amount}}</td>
+      <td>{{tx.created_at}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock content %}
