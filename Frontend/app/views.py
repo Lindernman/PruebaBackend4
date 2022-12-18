@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 import requests
-import requests
+
 
 
 def inicio(request):
